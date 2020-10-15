@@ -58,6 +58,9 @@ class allProducts extends Component{
 	redirectToPost=(productUrl)=>{
 		// this.setState({redirectlink:productUrl})
 	}
+	setGoToCartValue=(i)=>{
+		k.products[i].goToCart=true
+	}
 	resetTotalquantity=(i)=>{
 		k.products[i].quantity=k.products[i].quantity-1
 	}
@@ -76,11 +79,20 @@ class allProducts extends Component{
 	backToListing=()=>{
 		this.setState({showCart:false})
 	}
+	setCartIconValue=()=>{
+		let cartIconValue=0;
+		for(let i=0;i<this.state.cartItems.length;i++){
+			cartIconValue+=5-this.state.cartItems[i].quantity
+		}
+		this.setState({cartIconValue:cartIconValue})
+	}
 	removeItemFromCart=(index)=>{
 		let cartItems=[]
-		for(let i=0;i<this.state.cartItems;i++){
-			if (i!=index) {
+		for(let i=0;i<this.state.cartItems.length;i++){
+			if (this.state.cartItems[i].index!=index) {
 				cartItems.push(this.state.cartItems[i])
+			}else{
+				k.products[index].quantity=5
 			}
 		}
 		this.setState({cartItems})
@@ -97,6 +109,8 @@ class allProducts extends Component{
 					 goToCart={this.goToCart}
 					 addCartItems={this.addCartItems}
 					 index={i}
+					 setCartIconValue={this.setCartIconValue}
+					 setGoToCartValue={this.setGoToCartValue}
 					 />
 					<ProductCard 
 					 product={k.products[i+1]} 
@@ -105,6 +119,8 @@ class allProducts extends Component{
 					 goToCart={this.goToCart}
 					 addCartItems={this.addCartItems}
 					 index={i+1}
+					 setCartIconValue={this.setCartIconValue}
+					 setGoToCartValue={this.setGoToCartValue}
 					  />
 				</div>
 				)
@@ -127,8 +143,9 @@ class allProducts extends Component{
 		 		<div>
 			 		<Navbar
 			 			pageTitle={k.pageTitle}
-			 			totalquantity={this.state.cartItems.length}
+			 			cartIconValue={this.state.cartIconValue}
 			 			goToCart={this.goToCart}
+			 			setCartIconValue={this.setCartIconValue}
 			 		 />
 			 		 {
 			 		 	this.productlisting(k)

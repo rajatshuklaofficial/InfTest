@@ -34,7 +34,9 @@ class Navbar extends Component {
 			addToCart:true,
 		}
 	}
-
+	componentDidMount(){
+		this.props.setCartIconValue()
+	}
 	render(){
 		return(
 			<div style={mainDivStyle}>
@@ -46,7 +48,7 @@ class Navbar extends Component {
 				<img style = {imgStyle} src='/img/search.webp'/>
 				<div style={{"display":'flex', 'justifyContent':'center'}} onClick={this.props.goToCart}>
 					<img style = {imgStyle} src='/img/cart.webp'/>	
-					<div style={quantityStyle}>{this.props.totalquantity}</div>
+					<div style={quantityStyle}>{this.props.cartIconValue}</div>
 				</div>
 				<img style = {imgStyle} src='/img/more.png'/>
 			</div>

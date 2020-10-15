@@ -67,12 +67,14 @@ class user extends Component{
 					<div style={{"fontSize":"11px","width":"120px"}}>{this.props.product.details.title}</div>
 					<div style={{"fontSize":"11px","width":"120px"}}>&#11088;&#11088;&#11088;&#11088;&#11088;</div>
 					<AddToCartButton 
-					resetSoldProduct={this.resetSoldProduct}
-					goToCart={this.props.goToCart}
-					addCartItems={this.props.addCartItems}
-					product={this.props.product}
-					resetTotalquantity={this.props.resetTotalquantity}
-					index={this.props.index}
+						resetSoldProduct={this.resetSoldProduct}
+						goToCart={this.props.goToCart}
+						addCartItems={this.props.addCartItems}
+						product={this.props.product}
+						resetTotalquantity={this.props.resetTotalquantity}
+						index={this.props.index}
+						setCartIconValue={this.props.setCartIconValue}
+						setGoToCartValue={this.props.setGoToCartValue}
 					/>
 			</div>
 	 		)

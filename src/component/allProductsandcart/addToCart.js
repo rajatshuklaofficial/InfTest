@@ -33,19 +33,21 @@ class addToCart extends Component{
 		let product = this.props.product;
 		product.index=this.props.index;
 		this.props.addCartItems(product)
+		this.props.setCartIconValue()
+		this.props.setGoToCartValue(this.props.product.index)
 	}
 	 render(){	
 	 	return(
 	 		<div>
 	 		{(this.props.product.quantity>0)?
-	 			<div>{(this.state.goToCart)?
+	 			<div>{(this.props.product.goToCart)?
 			 			<button style={buttonStyle} onClick={this.props.goToCart}>Go To Cart</button>
 			 			:
 			 			<button style={buttonStyle} onClick={this.setGotoCart}>Add To Cart</button>
 			 		}
 				</div>
 				:
-				<button style={buttonStyleRed} onClick={this.setGotoCart}>Out Of Stock</button>
+				<button style={buttonStyleRed}>Out Of Stock</button>
 	 		}
 	 		</div>
 	 		)
