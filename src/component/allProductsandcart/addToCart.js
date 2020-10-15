@@ -34,13 +34,12 @@ class addToCart extends Component{
 		product.index=this.props.index;
 		this.props.addCartItems(product)
 		this.props.setCartIconValue()
-		this.props.setGoToCartValue(this.props.product.index)
 	}
 	 render(){	
 	 	return(
 	 		<div>
 	 		{(this.props.product.quantity>0)?
-	 			<div>{(this.props.product.goToCart)?
+	 			<div>{(this.props.product.quantity<5)?
 			 			<button style={buttonStyle} onClick={this.props.goToCart}>Go To Cart</button>
 			 			:
 			 			<button style={buttonStyle} onClick={this.setGotoCart}>Add To Cart</button>

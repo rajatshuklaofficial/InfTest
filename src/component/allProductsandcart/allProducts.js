@@ -58,9 +58,6 @@ class allProducts extends Component{
 	redirectToPost=(productUrl)=>{
 		// this.setState({redirectlink:productUrl})
 	}
-	setGoToCartValue=(i)=>{
-		k.products[i].goToCart=true
-	}
 	resetTotalquantity=(i)=>{
 		k.products[i].quantity=k.products[i].quantity-1
 	}
@@ -110,7 +107,6 @@ class allProducts extends Component{
 					 addCartItems={this.addCartItems}
 					 index={i}
 					 setCartIconValue={this.setCartIconValue}
-					 setGoToCartValue={this.setGoToCartValue}
 					 />
 					<ProductCard 
 					 product={k.products[i+1]} 
@@ -120,7 +116,6 @@ class allProducts extends Component{
 					 addCartItems={this.addCartItems}
 					 index={i+1}
 					 setCartIconValue={this.setCartIconValue}
-					 setGoToCartValue={this.setGoToCartValue}
 					  />
 				</div>
 				)
