@@ -108,9 +108,9 @@ class cart extends Component {
 							<div style={veticalFlex}>
 								<img style={{'width':'26px','height':'26px'}} src='/img/del.png' onClick={()=>this.props.removeItemFromCart(value.index)} />
 								<div style={{"fontSize":"12px","marginTop":'5px','overflow':'hidden'}}> 
-									&#8377;12000 
-									<span style={{"textDecoration":"line-through",'fontWeight': '300',"fontSize":"10px"}}>(24000)</span> 
-									<span style={{"fontSize":"10px","color":"green"}}>50% OFF</span>
+									&#8377;{value.details.variants[0].priceDetails.listedPrice} 
+									<span style={{"textDecoration":"line-through",'fontWeight': '300',"fontSize":"10px"}}>{value.details.variants[0].priceDetails.labelPrice}</span> 
+									<span style={{"fontSize":"10px","color":"green"}}>{value.details.variants[0].priceDetails.percentOff}% OFF</span>
 								</div>
 							</div>
 						</div>

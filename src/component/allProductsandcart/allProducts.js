@@ -61,7 +61,7 @@ class allProducts extends Component{
 			cartItems:[],
 			showCart:false,
 			cartIconValue:0,
-			filteredProducts:{}
+			filteredProducts:{},
 		}
 	}
 	onChange=(e)=>{
@@ -109,6 +109,18 @@ class allProducts extends Component{
 		}
 		this.setState({cartItems})
 	}
+	sortTheData=(event)=>{
+		const val=event.target.value;
+		let p=k
+		if (val==='Name') {
+			p.products.sort((a,b)=>(a.details.title>b.details.title)?1:-1)
+			this.setState({filteredProducts:p})
+		}else if(val==='Price'){
+			p.products.sort((a,b)=>(a.details.variants[0].priceDetails.listedPrice>b.details.variants[0].priceDetails.listedPrice)?1:-1)
+			this.setState({filteredProducts:p})
+		}
+
+	}
 	productlisting(k){
 		var d=[]
 		for(let i=0;i<k.products.length;i+=2){
@@ -128,8 +140,7 @@ class allProducts extends Component{
 					 :
 					 null
 				}
-					 <div>
-					 {	
+				{	
 					 (k.products[i+1])?
 						<ProductCard 
 						 product={k.products[i+1]} 
@@ -142,8 +153,7 @@ class allProducts extends Component{
 						  />
 						  :
 						  null
-					 }
-					  </div>
+				}
 				</div>
 				)
 			d.push(a)
@@ -170,6 +180,14 @@ class allProducts extends Component{
 			 			setCartIconValue={this.setCartIconValue}
 			 		 />
 			 		 <input placeholder="Search.."  icon ="Search" style= {subDivSearch} onChange={this.onChange}/>
+			 		 <div style={{'display':'flex'}}>
+			 		 <div>Sort By: &nbsp;</div>
+			 		 <select style={{"fontSize":"15px"}}  onChange={this.sortTheData} >
+			 		 				  <option value="None">None</option>
+									  <option value="Name">Name</option>
+									  <option value="Price">Price</option>
+									 </select>
+					 </div>
 			 		 {
 			 		 	this.productlisting((this.state.filteredProducts.products)?this.state.filteredProducts:k)
 			 		 }
