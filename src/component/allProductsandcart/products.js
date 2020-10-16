@@ -74,7 +74,6 @@ class user extends Component{
 						resetTotalquantity={this.props.resetTotalquantity}
 						index={this.props.index}
 						setCartIconValue={this.props.setCartIconValue}
-						setGoToCartValue={this.props.setGoToCartValue}
 					/>
 			</div>
 	 		)

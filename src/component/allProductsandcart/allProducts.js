@@ -42,6 +42,14 @@ const quantityStyle={
 	fontSize:'11px',
 	textAlign:'center',
 }
+const subDivSearch={
+	height:'auto',
+	width: '100%',
+	backgroundColor:'#ffffff',
+	marginBottom:'10px',
+	borderRadius:'4px',
+	padding:'5px',
+}
 
 class allProducts extends Component{
 	constructor(){
@@ -53,10 +61,16 @@ class allProducts extends Component{
 			cartItems:[],
 			showCart:false,
 			cartIconValue:0,
+			filteredProducts:{}
 		}
 	}
-	redirectToPost=(productUrl)=>{
-		// this.setState({redirectlink:productUrl})
+	onChange=(e)=>{
+		let value= (e)?e.target.value:'';
+		let p={products:[]}
+		p.products =  k.products.filter(product =>{
+			return product.details.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
+		})
+		this.setState({filteredProducts:p})
 	}
 	resetTotalquantity=(i)=>{
 		k.products[i].quantity=k.products[i].quantity-1
@@ -75,6 +89,7 @@ class allProducts extends Component{
 	}
 	backToListing=()=>{
 		this.setState({showCart:false})
+		this.onChange()
 	}
 	setCartIconValue=()=>{
 		let cartIconValue=0;
@@ -99,6 +114,8 @@ class allProducts extends Component{
 		for(let i=0;i<k.products.length;i+=2){
 			let a=(
 				<div style={{"display":'flex', 'justifyContent':'center','width':'100%','borderTop':'1px solid #f1f1f1'}}>
+				{	
+				(k.products[i])?
 					<ProductCard 
 					 product={k.products[i]}
 					 resetTotalquantity={this.resetTotalquantity}
@@ -108,15 +125,25 @@ class allProducts extends Component{
 					 index={i}
 					 setCartIconValue={this.setCartIconValue}
 					 />
-					<ProductCard 
-					 product={k.products[i+1]} 
-					 resetTotalquantity={this.resetTotalquantity}
-					 addCartItems={this.addCartItems}
-					 goToCart={this.goToCart}
-					 addCartItems={this.addCartItems}
-					 index={i+1}
-					 setCartIconValue={this.setCartIconValue}
-					  />
+					 :
+					 null
+				}
+					 <div>
+					 {	
+					 (k.products[i+1])?
+						<ProductCard 
+						 product={k.products[i+1]} 
+						 resetTotalquantity={this.resetTotalquantity}
+						 addCartItems={this.addCartItems}
+						 goToCart={this.goToCart}
+						 addCartItems={this.addCartItems}
+						 index={i+1}
+						 setCartIconValue={this.setCartIconValue}
+						  />
+						  :
+						  null
+					 }
+					  </div>
 				</div>
 				)
 			d.push(a)
@@ -142,8 +169,9 @@ class allProducts extends Component{
 			 			goToCart={this.goToCart}
 			 			setCartIconValue={this.setCartIconValue}
 			 		 />
+			 		 <input placeholder="Search.."  icon ="Search" style= {subDivSearch} onChange={this.onChange}/>
 			 		 {
-			 		 	this.productlisting(k)
+			 		 	this.productlisting((this.state.filteredProducts.products)?this.state.filteredProducts:k)
 			 		 }
 		 		 </div>
 	 		}
